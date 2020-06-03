@@ -1,10 +1,4 @@
-# go-ipfs-pinner
-
-[![](https://img.shields.io/badge/made%20by-Protocol%20Labs-blue.svg?style=flat-square)](https://protocol.ai)
-[![](https://img.shields.io/badge/project-IPFS-blue.svg?style=flat-square)](http://ipfs.io/)
-[![](https://img.shields.io/badge/freenode-%23ipfs-blue.svg?style=flat-square)](http://webchat.freenode.net/?channels=%23ipfs)
-[![Coverage Status](https://codecov.io/gh/ipfs/go-ipfs-pinner/branch/master/graph/badge.svg)](https://codecov.io/gh/ipfs/go-ipfs-pinner)
-[![Travis CI](https://travis-ci.org/ipfs/go-ipfs-pinner.svg?branch=master)](https://travis-ci.org/ipfs/go-ipfs-pinner)
+# go-btfs-pinner
 
 ## Background
 
@@ -15,14 +9,14 @@ The pinner system is responsible for keeping track of which objects a user wants
 Via `go get`:
 
 ```sh
-$ go get github.com/ipfs/go-ipfs-pinner
+$ go get github.com/TRON-US/go-btfs-pinner
 ```
 
 > Requires Go 1.13
 
 ## Documentation
 
-https://godoc.org/github.com/ipfs/go-ipfs-pinner
+https://godoc.org/github.com/TRON-US/go-btfs-pinner
 
 ## Contribute
 
@@ -34,4 +28,4 @@ Small note: If editing the Readme, please conform to the [standard-readme](https
 
 This library is dual-licensed under Apache 2.0 and MIT terms.
 
-Copyright 2019. Protocol Labs, Inc.
+Copyright 2020. TRON-US.
