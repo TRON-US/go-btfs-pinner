@@ -14,7 +14,7 @@ import (
 	ipld "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 
-	"github.com/ipfs/go-ipfs-pinner/internal/pb"
+	"github.com/TRON-US/go-btfs-pinner/internal/pb"
 )
 
 const (

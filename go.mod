@@ -1,4 +1,4 @@
-module github.com/ipfs/go-ipfs-pinner
+module github.com/TRON-US/go-btfs-pinner
 
 go 1.13
 
