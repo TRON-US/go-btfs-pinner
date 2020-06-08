@@ -392,7 +392,7 @@ func (p *pinner) isPinnedWithType(ctx context.Context, c cid.Cid, mode Mode) (st
 		if p.recursePinMap.IsExpired(rc) {
 			continue
 		}
-		has, err := hasChild(p.internal, rc, c, visitedSet.Visit)
+		has, err := hasChild(ctx, p.internal, rc, c, visitedSet.Visit)
 		if err != nil {
 			// Do not return error and skip bad children and continue the search
 			log.Debug("unable to check pin on child [%s]: %v", rc.String(), err)
@@ -581,11 +581,11 @@ func (p *pinner) DirectKeys(ctx context.Context) ([]cid.Cid, error) {
 }
 
 // DirectMap returns the map for the directly pinned keys
-func (p *pinner) DirectMap() *cid.Map {
+func (p *pinner) DirectMap(ctx context.Context) (*cid.Map, error) {
 	p.lock.RLock()
 	defer p.lock.RUnlock()
 
-	return p.directPinMap
+	return p.directPinMap, nil
 }
 
 // RecursiveKeys returns a slice containing the recursively pinned keys
@@ -597,11 +597,11 @@ func (p *pinner) RecursiveKeys(ctx context.Context) ([]cid.Cid, error) {
 }
 
 // RecursiveMap returns the map for the recursively pinned keys
-func (p *pinner) RecursiveMap() *cid.Map {
+func (p *pinner) RecursiveMap(ctx context.Context) (*cid.Map, error) {
 	p.lock.RLock()
 	defer p.lock.RUnlock()
 
-	return p.recursePinMap
+	return p.recursePinMap, nil
 }
 
 // Update updates a recursive pin from one cid to another
@@ -738,7 +738,7 @@ func (p *pinner) PinWithMode(c cid.Cid, expir uint64, mode Mode) {
 	}
 }
 
-func (p *pinner) HasExpiration(c cid.Cid) (bool, error) {
+func (p *pinner) HasExpiration(ctx context.Context, c cid.Cid) (bool, error) {
 	if p.directPin.Has(c) {
 		if p.directPinMap.HasExpiration(c) {
 			return true, nil
@@ -756,7 +756,7 @@ func (p *pinner) HasExpiration(c cid.Cid) (bool, error) {
 		if !p.recursePinMap.HasExpiration(k) {
 			continue
 		}
-		has, err := hasChild(p.internal, k, c, visitedSet.Visit)
+		has, err := hasChild(ctx, p.internal, k, c, visitedSet.Visit)
 		if err != nil {
 			// Do not return error and skip bad children and continue the search
 			log.Debug("unable to check expiration on child [%s]: %v", k.String(), err)

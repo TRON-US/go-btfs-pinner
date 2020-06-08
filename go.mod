@@ -14,3 +14,5 @@ require (
 	github.com/ipfs/go-log v0.0.1
 	github.com/ipfs/go-merkledag v0.3.0
 )
+
+replace github.com/ipfs/go-cid => github.com/TRON-US/go-cid v0.2.0
