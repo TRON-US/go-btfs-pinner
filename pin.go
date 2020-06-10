@@ -166,6 +166,9 @@ type Pinner interface {
 	// HasExpiration returns true if the given Cid or its ancestor has
 	// expiration time
 	HasExpiration(ctx context.Context, cid cid.Cid) (bool, error)
+
+	// IsExpiredPin checks if the given Cid has already expired
+	IsExpiredPin(ctx context.Context, c cid.Cid) bool
 }
 
 // Pinned represents CID which has been pinned with a pinning strategy.
@@ -769,11 +772,11 @@ func (p *pinner) HasExpiration(ctx context.Context, c cid.Cid) (bool, error) {
 	return false, nil
 }
 
-func IsExpiredPin(c cid.Cid, pinRecurMap *cid.Map, pinDirectMap *cid.Map) bool {
-	if pinRecurMap != nil && pinRecurMap.IsExpired(c) {
+func (p *pinner) IsExpiredPin(ctx context.Context, c cid.Cid) bool {
+	if p.recursePinMap != nil && p.recursePinMap.IsExpired(c) {
 		return true
 	}
-	if pinDirectMap != nil && pinDirectMap.IsExpired(c) {
+	if p.directPinMap != nil && p.directPinMap.IsExpired(c) {
 		return true
 	}
 	return false
